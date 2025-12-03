@@ -1,6 +1,17 @@
 <script setup>
 import { Button } from '@/components/ui/button'
 import Guide from '@/guide/GuideManager'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
+function devEntry() {
+  if (Guide.state.active) {
+    Guide.toggleDebug()
+  } else {
+    Guide.start(String(route.name), { debug: true, persist: true, resume: true })
+  }
+}
 </script>
 
 <template>
@@ -13,6 +24,7 @@ import Guide from '@/guide/GuideManager'
           <router-link class="text-sm hover:underline" to="/">首页</router-link>
           <router-link class="text-sm hover:underline" to="/activities">活动列表</router-link>
           <Button size="sm" variant="outline" @click="Guide.start($route.name)">新手引导</Button>
+          <Button size="sm" variant="outline" @click="devEntry">开发者模式</Button>
         </nav>
       </div>
     </header>

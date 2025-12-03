@@ -46,7 +46,7 @@ function startTimer() {
   stopTimer()
   timer = setInterval(() => {
     current.value = (current.value + 1) % data.value.bannerList.length
-  }, 2500)
+  }, 1500)
 }
 
 function stopTimer() {
@@ -99,8 +99,8 @@ function onTouchEnd() {
     <div class="flex items-center justify-between">
       <h2 class="text-lg font-semibold">重点活动</h2>
       <div class="flex gap-2" data-guide="home-layout">
-        <Button variant="outline" @click="layout = 'grid'">宫格</Button>
-        <Button variant="outline" @click="layout = 'carousel'">轮播</Button>
+        <Button variant="outline" @click="layout = 'grid'" data-guide="home-grid-btn">宫格</Button>
+        <Button variant="outline" @click="layout = 'carousel'" data-guide="home-carousel-btn">轮播</Button>
       </div>
     </div>
 

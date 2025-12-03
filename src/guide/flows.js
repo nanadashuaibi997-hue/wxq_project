@@ -1,8 +1,17 @@
 const flows = {
   home: [
-    { title: '切换布局', content: '在这里切换宫格与轮播两种首页布局', selector: '[data-guide="home-layout"]' },
-    { title: '分类入口', content: '点击分类查看对应的重点活动', selector: '[data-guide="home-categories"]' },
-    { title: '轮播控制', content: '通过左右按钮切换上一张/下一张', selector: '[data-guide="home-carousel-next"]', guard: () => document.querySelector('[data-guide="home-carousel-next"]') !== null },
+    { title: '切换布局', content: '在这里切换宫格与轮播两种首页布局', selector: '[data-guide="home-layout"]', hints: ['布局', '宫格', '轮播'] },
+    { title: '分类入口', content: '点击分类查看对应的重点活动', selector: '[data-guide="home-categories"]', hints: ['分类', '入口'] },
+    { title: '轮播控制', content: '通过左右按钮切换上一张/下一张', selector: '[data-guide="home-carousel-next"]', hints: ['轮播', '下一张', '上一张', '切换', '›', '‹'],
+      onEnter: () => {
+        const btn = document.querySelector('[data-guide="home-carousel-btn"]')
+        if (btn) btn.click()
+      },
+      onLeave: () => {
+        const btn = document.querySelector('[data-guide="home-carousel-btn"]')
+        if (btn) btn.click()
+      }
+    },
   ],
   activities: [
     { title: '状态筛选', content: '按活动状态进行过滤', selector: '[data-guide="list-status"]' },
@@ -12,9 +21,9 @@ const flows = {
     { title: '活动列表', content: '这里展示筛选后的活动列表，支持虚拟滚动与分页', selector: '[data-guide="list-container"]' },
   ],
   'activity-detail': [
-    { title: '进入编辑', content: '点击切换到编辑模式修改活动信息', selector: '[data-guide="detail-edit"]', guard: () => window.__hasEditPermission !== false },
-    { title: '活动规则', content: '在此编写或查看活动规则文案', selector: '[data-guide="detail-rules"]' },
-    { title: '提交更新', content: '编辑完成后提交更新并获得反馈', selector: '[data-guide="detail-submit"]', onEnter: () => {
+    { title: '进入编辑', content: '点击切换到编辑模式修改活动信息', selector: '[data-guide="detail-edit"]', guard: () => window.__hasEditPermission !== false, hints: ['编辑', '修改'] },
+    { title: '活动规则', content: '在此编写或查看活动规则文案', selector: '[data-guide="detail-rules"]', hints: ['规则'] },
+    { title: '提交更新', content: '编辑完成后提交更新并获得反馈', selector: '[data-guide="detail-submit"]', hints: ['提交', '更新', '保存'], onEnter: () => {
       const submitBtn = document.querySelector('[data-guide="detail-submit"]')
       if (submitBtn) return
       const editBtn = document.querySelector('[data-guide="detail-edit"]')

@@ -23,4 +23,21 @@ router.afterEach((to) => {
   }
 })
 
+// Global hotkeys for developer entry
+if (typeof window !== 'undefined') {
+  window.addEventListener('keydown', (e) => {
+    const route = router.currentRoute.value
+    if (!route || !route.name) return
+    const name = route.name
+
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'g') {
+      Guide.start(String(name), { debug: true, persist: true, resume: true })
+    }
+
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'd') {
+      if (Guide.state.active) Guide.toggleDebug()
+    }
+  })
+}
+
 export default router
